@@ -1,0 +1,94 @@
+@use '../base/variables' as v;
+@use '../components/mixins' as m;
+
+.header {
+    &__title {
+        background-image: linear-gradient(to right, v.$degradadoAzul, v.$degradadoVerde);
+        font-size: 6rem;
+        line-height: 1.1;
+        margin: 0;
+        text-align: center;
+        font-weight: 500; 
+        padding: 2rem 0 3rem;
+    }
+}
+
+.form {
+
+    margin: 4rem 0 10rem;
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        border: none;
+    }
+
+    .field--cuatro {
+        @include m.tablet { 
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+        
+    }
+    
+    .field--tres {
+        @include m.tablet { 
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+    }
+
+    .campo {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        label {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        select {
+            padding: 1rem ;
+            border-color: v.$border;
+        }
+    }
+}
+
+.resultados {
+    padding: 3rem 0;
+    h2 {
+        font-size: 6rem;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .resultado {
+        padding: 2rem;
+        font-size: 2rem;
+        text-align: center;
+        line-height: 1.5;
+        border-bottom: 1px solid v.$border;
+        &:last-of-type {
+            border: none;
+        }
+    }
+}
+
+footer {
+    background-image: linear-gradient(to right, v.$degradadoAzul, v.$degradadoVerde);
+    p{
+        font-size: 6rem;
+        line-height: 1.1;
+        margin: 0;
+        text-align: center;
+        font-weight: 500; 
+        padding: 3rem 0 2rem;
+        color: v.$blanco;
+    }
+}

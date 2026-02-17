@@ -9,12 +9,114 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./dist/css/style.css">
 </head>
 <body>
+    <header class="header">
+        <h1 class="header__title">Buscador de autos</h1>
+    </header>
+    <main class="main">
+        <div class="main__contenedor">
+            <form class="form">
+                <fieldset class="field field--cuatro">
+                    <div class="campo">
+                        <label for="marca">Marca</label>
+                        <select name="marca" id="marca">
+                            <option value="" checked>Seleccione</option>
+                            <option value="audi">Audi</option>
+                            <option value="bmw">BMW</option>
+                            <option value="mercedes benz">Mercedes Benz</option>
+                            <option value="chevrolet">Chevrolet</option>
+                            <option value="ford">Ford</option>
+                            <option value="dogde">Dogde</option>
+                        </select>
+                    </div>
+        
+                    <div class="campo">
+                        <label for="year">Año</label>
+                        <select name="year" id="year">
+                            <option value="" checked>Seleccione</option>
+                        </select>
+                    </div>
+        
+                    <div class="campo">
+                        <label for="min">Precio Min</label>
+                        <select name="min" id="min">
+                            <option value="" checked>Seleccione</option>
+                            <option value="20000">20,000</option>
+                            <option value="30000">30,000</option>
+                            <option value="40000">40,000</option>
+                            <option value="50000">50,000</option>
+                            <option value="60000">60,000</option>
+                            <option value="70000">70,000</option>
+                            <option value="80000">80,000</option>
+                            <option value="90000">90,000</option>
+                        </select>
+                    </div>
+        
+                    <div class="campo">
+                        <label for="max">Precio Max</label>
+                        <select name="max" id="max">
+                            <option value="" checked>Seleccione</option>
+                            <option value="20000">20,000</option>
+                            <option value="30000">30,000</option>
+                            <option value="40000">40,000</option>
+                            <option value="50000">50,000</option>
+                            <option value="60000">60,000</option>
+                            <option value="70000">70,000</option>
+                            <option value="80000">80,000</option>
+                            <option value="90000">90,000</option>
+                        </select>
+                    </div>
+                </fieldset>
+        
+                <fieldset class="field field--tres">
+                    <div class="campo">
+                        <label for="puertas">Puertas</label>
+                        <select name="puertas" id="puertas">
+                            <option value="" checked>Seleccione</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+        
+                    <div class="campo">
+                        <label for="transmision">Transmisión</label>
+                        <select name="transmision" id="transmision">
+                            <option value="" checked>Seleccione</option>
+                            <option value="automatica">Automatica</option>
+                            <option value="manual">Manual</option>
+                        </select>
+                    </div>
+        
+                    <div class="campo">
+                        <label for="color">Color</label>
+                        <select name="color" id="color">
+                            <option value="" checked>Seleccione</option>
+                            <option value="negro">Negro</option>
+                            <option value="azul">Azul</option>
+                            <option value="blanco">Blanco</option>
+                            <option value="rojo">Rojo</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </form>
+
+            <div class="resultados">
+                <h2>Resultados</h2>
+                <div class="resultados">
+                </div>
+            </div>
+        </div>
+    </main>
+
     
 
+    <footer>
+        <p>Buscador Autos</p>
+    </footer>
     <script src="./dist/js/imagenes.js"></script>
+    <script src="./dist/js/db.js"></script>
     <script src="./dist/js/app.js"></script>
 </body>
 </html>
