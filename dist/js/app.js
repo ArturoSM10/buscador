@@ -1,15 +1,27 @@
+const { constants } = require("buffer");
+
 const campos = {
-        marca: obtenerInfo,
-        year: obtenerInfo,
-        min: obtenerInfo,
-        max: obtenerInfo,
-        puertas: obtenerInfo,
-        transmision: obtenerInfo,
-        color: obtenerInfo
+        marca: filtrarCampos,
+        year: filtrarCampos,
+        min: filtrarCampos,
+        max: filtrarCampos,
+        puertas: filtrarCampos,
+        transmision: filtrarCampos,
+        color: filtrarCampos
     };
 
+const camposActualizados = {
+    marca: '',
+    year: '',
+    min: '',
+    max: '',
+    puertas: '',
+    transmision: '',
+    color: ''
+};
+
 document.addEventListener('DOMContentLoaded', ()=> {
-    const anios = Array.from({ length: 11 }, (_, i) => new Date().getFullYear() - i);
+    const anios = Array.from({ length: 11 }, (_, i) => 2021 - i);
 
     agregarAnios(anios);
     agregarInfo(autos);
@@ -29,6 +41,7 @@ function agregarAnios(datos) {
 };
 
 function agregarInfo(datos) {
+    limpiarHtml();
     const resultados = document.querySelector('.resultados');
     datos.map( dato => {
         const {marca, modelo, year, precio, puertas, transmision, color} = dato;
@@ -39,16 +52,37 @@ function agregarInfo(datos) {
     });
 }
 
-function leerEventos(entrada) {
+function leerEventos() {
     const form = document.querySelector('.form');
     form.addEventListener('change', e =>{
-        const validador = campos[e.target.id];
+        const id = e.target.id;
+        const valor = e.target.value
+        const validador = campos[id];
         if (validador) {
-            validador(e.target);
+            camposActualizados[id] = valor;
+            validador(valor);
         }
     });
 }
+function filtrarCampos() {
+    const {marca, year, min, max, puertas, transmision, color} = camposActualizados;
 
-function obtenerInfo(input) {
-    return input.value;
+    const nuevoArray = autos.filter(auto => {
+        return (marca === '' || marca === auto.marca.toLowerCase()) && 
+               (year === '' || Number(year) === auto.year) &&
+               (min === '' || auto.precio >= Number(min)) &&
+               (max === '' || auto.precio <= Number(max)) &&
+               (puertas === '' || auto.puertas === Number(puertas)) &&
+               (transmision === '' || transmision === auto.transmision.toLowerCase()) &&
+               (color === '' || color === auto.color.toLowerCase());
+    });
+
+    agregarInfo(nuevoArray);
+}
+
+function limpiarHtml() {
+    const resultados = document.querySelector('.resultados');
+    while(resultados.firstElementChild) {
+        resultados.firstElementChild.remove();
+    }
 }
