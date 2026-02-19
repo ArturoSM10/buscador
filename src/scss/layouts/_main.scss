@@ -60,8 +60,9 @@
     }
 }
 
-.resultados {
-    padding: 3rem 0;
+.resultados-contenedor {
+    padding: 3rem 0 0;
+    min-height: 40rem;
     h2 {
         font-size: 6rem;
         text-align: center;
@@ -77,6 +78,25 @@
         &:last-of-type {
             border: none;
         }
+    }
+
+    .resultados__alert {
+        background-color: v.$rojo;
+        padding: 2rem 0;
+        text-align: center;
+        font-size: 4rem;
+        color: v.$blanco;
+        border-radius: 1rem;
+        margin: 0;
+
+    }
+    
+    .activo {
+        display: block;
+    }
+    
+    .inactivo{
+        display: none;
     }
 }
 

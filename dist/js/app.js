@@ -1,5 +1,3 @@
-const { constants } = require("buffer");
-
 const campos = {
         marca: filtrarCampos,
         year: filtrarCampos,
@@ -43,6 +41,7 @@ function agregarAnios(datos) {
 function agregarInfo(datos) {
     limpiarHtml();
     const resultados = document.querySelector('.resultados');
+    agregarAlerta(datos);
     datos.map( dato => {
         const {marca, modelo, year, precio, puertas, transmision, color} = dato;
         const resultado = document.createElement('P');
@@ -84,5 +83,20 @@ function limpiarHtml() {
     const resultados = document.querySelector('.resultados');
     while(resultados.firstElementChild) {
         resultados.firstElementChild.remove();
+    }
+}
+
+function agregarAlerta(entrada) {
+    const alerta = document.querySelector('.resultados__alert');
+
+    if ((entrada.length === 0 && alerta.classList.contains('activo')) || (entrada.length !== 0 && alerta.classList.contains('inactivo'))) return;
+
+    else if(entrada.length === 0 && alerta.classList.contains('inactivo')) {
+        alerta.classList.remove('inactivo');
+        alerta.classList.add('activo');
+    }
+    else {
+        alerta.classList.remove('activo');
+        alerta.classList.add('inactivo');
     }
 }
