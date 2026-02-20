@@ -8,20 +8,11 @@ const camposActualizados = {
     color: ''
 };
 
-const autoNormalizado = autos.map(auto =>{
-
-    return {
-        ...auto,
-        marca: auto.marca.toLowerCase(),
-        transmision: auto.transmision.toLowerCase(),
-        color: auto.color.toLowerCase()
-    }
-});
-
 document.addEventListener('DOMContentLoaded', ()=> {
     const anios = Array.from({ length: 11 }, (_, i) => 2021 - i);
+
     agregarAnios(anios);
-    agregarInfo(autoNormalizado);
+    agregarInfo(autos);
     leerEventos();
     
 });
@@ -29,7 +20,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 function agregarAnios(datos) {
     const year = document.querySelector('#year');
 
-    datos.forEach( dato => {
+    Object.values(datos).map( dato => {
         const option = document.createElement('option');
         option.textContent = dato;
         option.value = dato;
@@ -40,6 +31,7 @@ function agregarAnios(datos) {
 function agregarInfo(datos) {
     limpiarHtml();
     const resultados = document.querySelector('.resultados');
+    agregarAlerta(datos);
     datos.forEach((dato)=>{
         const {marca, modelo, year, precio, puertas, transmision, color} = dato;
         const resultado = document.createElement('P');
@@ -56,23 +48,28 @@ function leerEventos() {
         const {id, value} = e.target;
         if(!(id in camposActualizados)) return;
         camposActualizados[id] = value;
-        filtradoCompletado()
+        filtrarCampos()
     });
 }
-function filtrarCampos(tipado, objetoPrincipal) {
-    const {marca, year, min, max, puertas, transmision, color} = tipado;
+function filtrarCampos() {
+    let {marca, year, min, max, puertas, transmision, color} = camposActualizados;
 
-    const nuevoArray = objetoPrincipal.filter(objeto => {
-        return ((marca === '' || marca === objeto.marca) && 
-               (year === '' || year === objeto.year) &&
-               (min === '' || objeto.precio >= min) &&
-               (max === '' || objeto.precio <= max) &&
-               (puertas === '' || objeto.puertas === puertas) &&
-               (transmision === '' || transmision === objeto.transmision) &&
-               (color === '' || color === objeto.color));
+    year = (year !== '' ? Number(year) : year);
+    min = (min !== '' ? Number(min) : min);
+    max = (max !== '' ? Number(max) : max);
+    puertas = (puertas !== '' ? Number(puertas) : puertas);
+
+    const nuevoArray = autos.filter(auto => {
+        return ((marca === '' || marca === auto.marca.toLowerCase()) && 
+               (year === '' || year === auto.year) &&
+               (min === '' || auto.precio >= min) &&
+               (max === '' || auto.precio <= max) &&
+               (puertas === '' || auto.puertas === puertas) &&
+               (transmision === '' || transmision === auto.transmision.toLowerCase()) &&
+               (color === '' || color === auto.color.toLowerCase()));
     });
-
-    return nuevoArray
+    agregarAlerta(nuevoArray);
+    agregarInfo(nuevoArray);
 }
 
 function limpiarHtml() {
@@ -86,21 +83,16 @@ function agregarAlerta(entrada) {
     const alerta = document.querySelector('.resultados__alert');
     alerta.classList.toggle('activo', entrada.length=== 0);
     alerta.classList.toggle('inactivo', entrada.length!== 0);
-}
 
-function cambiarTipo(entrada) {
-    return {
-        ...entrada,
-        year: (entrada.year !== '' ? Number(entrada.year) : entrada.year),
-        min: (entrada.min !== '' ? Number(entrada.min) : entrada.min),
-        max: (entrada.max !== '' ? Number(entrada.max) : entrada.max),
-        puertas: (entrada.puertas !== '' ? Number(entrada.puertas) : entrada.puertas)
-    };
-}
 
-function filtradoCompletado() {
-    const objetoTipado = cambiarTipo(camposActualizados);
-    const objetoFiltrado = filtrarCampos(objetoTipado, autoNormalizado);
-    agregarAlerta(objetoFiltrado);
-    agregarInfo(objetoFiltrado);
+    // if ((entrada.length === 0 && alerta.classList.contains('activo')) || (entrada.length !== 0 && alerta.classList.contains('inactivo'))) return;
+
+    // else if(entrada.length === 0 && alerta.classList.contains('inactivo')) {
+    //     alerta.classList.remove('inactivo');
+    //     alerta.classList.add('activo');
+    // }
+    // else {
+    //     alerta.classList.remove('activo');
+    //     alerta.classList.add('inactivo');
+    // }
 }
